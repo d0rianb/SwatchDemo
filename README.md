@@ -2,7 +2,7 @@
 
 A demo of this project is available [here](https://d0rianb.github.io/SwatchDemo/).
 
-Created with the [UnrailEngine](https://github.com/d0rianb/UnrailEngine)
+*Created and powered by the [UnrailEngine](https://github.com/d0rianb/UnrailEngine).*
 
 * * *
 
