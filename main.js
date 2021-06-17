@@ -21,7 +21,7 @@ class Swatch extends GameEnvironement {
         this.radius = Math.min(this.width / 3, this.height / 3)
         this.pointArray = new Array(POINT_AMOUNT).fill(null).map((el, i) => {
             return {
-                limitAngle: 2 * Math.PI / POINT_AMOUNT * i,
+                limitAngle: 2 * Math.PI / POINT_AMOUNT * i - Math.PI / 2,
                 dist: this.radius - this.radius / POINT_AMOUNT * i,
                 point: this.center.add(new Point(this.dist * Math.cos(this.angle), this.dist * Math.sin(this.angle)))
             }
@@ -39,8 +39,9 @@ class Swatch extends GameEnvironement {
         this.pointArray.forEach((el, i) => {
             const initialRadius = this.radius / POINT_AMOUNT * i
             const limitAngle = el.limitAngle
-            if (this.angle * dir < limitAngle * dir) {
-                el.point = this.center.add(new Point(el.dist * Math.cos(this.angle), el.dist * Math.sin(this.angle)))
+            if ((this.angle - Math.PI / 2) * dir < limitAngle * dir) {
+                let angle = this.angle - Math.PI / 2
+                el.point = this.center.add(new Point(el.dist * Math.cos(angle), el.dist * Math.sin(angle)))
                 if (dir == -1 && el.dist > initialRadius) el.dist -= POINT_VELOCITY
             } else {
                 if (-dir * el.dist < -dir * this.radius) el.dist += -dir * POINT_VELOCITY
@@ -59,6 +60,7 @@ class Swatch extends GameEnvironement {
             lineWidth: 4,
             globalAlpha: .8
         }))
+        Renderer.endFrame()
         // Renderer.circle(this.center.x, this.center.y, this.radius + 10)
     }
 }
